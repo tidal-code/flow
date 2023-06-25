@@ -24,7 +24,7 @@ public class ArraySoftAssertionTest {
         new ErrorStack().execute();
     }
 
-    @Test(expected = VerificationError.class)
+    @Test(expected = AssertionError.class)
     public void arrayTypeTest(){
         Soft.verify("array should be a string array", getArray()).isTypeOf(Integer.class);
         new ErrorStack().execute();

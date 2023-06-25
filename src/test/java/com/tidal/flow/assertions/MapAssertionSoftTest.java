@@ -8,19 +8,19 @@ import java.util.Map;
 
 public class MapAssertionSoftTest {
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void mapContainsKeysFalseTest(){
         Soft.verify("Map should contain key 'hello, happy, java, javascript'", getMap()).containsKeys("hellow", "happy", "java", "javascript");
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void mapContainsValuesFalseTest(){
         Soft.verify("Map should contain values 'hello, world'", getMap()).containsValues("hellow", "happyy").containsKeys("wow", "woww").isNotNull();
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void nullMapTest(){
         Soft.verify("Map should contain values 'hello, world'", getNullMap()).containsValues("hello", "happy").containsKeys("world", "learning").isNotNull();
         new ErrorStack().execute();
@@ -32,13 +32,13 @@ public class MapAssertionSoftTest {
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void emptyMapEmptyTest(){
         Soft.verify("Map should not be empty", getEmptyMap()).isNotEmpty();
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void emptyMapFailTest(){
         Soft.verify("Map should not be empty", getMap()).isEmpty();
         new ErrorStack().execute();
@@ -50,13 +50,13 @@ public class MapAssertionSoftTest {
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void mapTypeTestFail(){
         Soft.verify("Map should be of same type", getMap()).isSameTypeAs(getDiffMapIntType());
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void mapTypeTestFailDiffType(){
         Soft.verify("Map should be of same type", getMap()).isSameTypeAs(getDiffMapStringIntType());
         new ErrorStack().execute();

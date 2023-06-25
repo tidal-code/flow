@@ -13,13 +13,13 @@ public class NumberAssertionTest {
         verify("Number should be equal to 5", 5).isEqualTo(6);
     }
 
-    @Test(expected = VerificationError.class)
+    @Test(expected = AssertionError.class)
     public void numberNotEqualsTest(){
         verify("Number should not be equal to 5", 5).isNotEqualTo(5);
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void numberIsNotNull(){
         Soft.verify("Number should not be equal to 5", getNull()).isNotNull();
         new ErrorStack().execute();
@@ -30,7 +30,12 @@ public class NumberAssertionTest {
         Soft.verify("Number should not be greater than 6", 5).isGreaterThan(6);
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
+    public void numberGreaterThanHardTest(){
+        Assert.verify("Number should not be greater than 6", 6).isGreaterThan(7);
+    }
+
+    @Test (expected = AssertionError.class)
     public void numberLessThanTest(){
         Soft.verify("Number should not be less than 4", 5).isLessThan(4);
         new ErrorStack().execute();
@@ -56,12 +61,12 @@ public class NumberAssertionTest {
         Soft.verify("Number should be negative", 5).isInRangeOf(1, 6);
     }
 
-    @Test(expected = VerificationError.class)
+    @Test(expected = AssertionError.class)
     public void inRangeOfHigherLowerValueFailTest(){
         Assert.verify("Number should be negative", 5).isInRangeOf(4, 1);
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void inRangeOfLowerHigherValueFailTest(){
         Assert.verify("Number should be negative", 5).isInRangeOf(1, 4);
     }

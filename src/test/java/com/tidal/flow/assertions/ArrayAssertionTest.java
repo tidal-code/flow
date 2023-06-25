@@ -12,12 +12,12 @@ public class ArrayAssertionTest {
         verify("array should contain 'hello' and 'world", getArray()).contains("hello", "world");
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void nullArrayTest(){
         verify("array should contain 'hello' and 'world", getNullArray()).contains("hello", "world");
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void stringArrayContainsTestFail(){
         verify("Failing: array should contain 'hello' and 'world", getArray()).contains("hellos", "worlds");
     }
@@ -27,7 +27,7 @@ public class ArrayAssertionTest {
         verify("array should not contain 'hellos' and 'worlds", getArray()).notContains("hellos", "worlds");
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void stringArrayNotContainsFailingTest(){
         verify("Failing: array should not contain 'hellos' and 'worlds", getArray()).notContains("hello", "world");
     }
@@ -37,7 +37,7 @@ public class ArrayAssertionTest {
         verify("array should have a size of 2", getArray()).hasSize(2);
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void arraySizeFailingTest(){
         verify("Failing: array should have a size of 2", getArray()).hasSize(3);
     }
@@ -47,7 +47,7 @@ public class ArrayAssertionTest {
         verify("array should be a string array", getArray()).isTypeOf(String.class);
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void arrayTypeFailingTest(){
         verify("Failing: array should be a string array", getArray()).isTypeOf(Integer.class);
     }
@@ -57,7 +57,7 @@ public class ArrayAssertionTest {
         verify("array should be empty", getEmptyArray()).isEmpty();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void emptyArrayFailingTest(){
         verify("Failing: array should be empty", getArray()).isEmpty();
     }

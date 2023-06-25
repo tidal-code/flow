@@ -3,10 +3,14 @@ package com.tidal.flow.assertions;
 import com.tidal.flow.assertions.stackbuilder.ErrorStack;
 import org.junit.After;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.tidal.flow.assertions.Assert.verify;
 
 public class BoolAssertionsTest {
+
+    Logger logger = LoggerFactory.getLogger(BoolAssertionSoftTest.class);
 
     @After
     public void cleanup(){
@@ -17,9 +21,10 @@ public class BoolAssertionsTest {
     public void falseValueTrueTestFail(){
         try{
             verify("Output should be true", true).isFalse();
-        } catch (Exception e){
+        } catch (AssertionError e){
+            logger.error(e.getMessage());
             verify("falseValueTrueTestFail", e.getMessage())
-                    .contains("Verification Failed: Value expected to be false but was true")
+                    .contains("Reason: Value expected to be false but was true")
                     .contains("Description: Output should be true")
                     .contains("com.tidal.flow.assertions.BoolAssertionsTest.falseValueTrueTestFail");
         }
@@ -32,7 +37,7 @@ public class BoolAssertionsTest {
 
     @Test
     public void falseValueTestPass(){
-        verify("Output should be false", false).isFalse();
+        verify("Output should be false",  false).isFalse();
     }
 
     @Test
@@ -44,9 +49,9 @@ public class BoolAssertionsTest {
     public void trueValueFalseTestFail(){
         try{
             verify("Output should be true", true).isFalse();
-        }catch (VerificationError e){
+        }catch (AssertionError e){
             verify("Output should be true", e.getMessage())
-                    .contains("Verification Failed: Value expected to be false but was true")
+                    .contains("Reason: Value expected to be false but was true")
                     .contains("Description: Output should be true")
                     .contains("com.tidal.flow.assertions.BoolAssertionsTest.trueValueFalseTestFail");
         }

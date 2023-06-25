@@ -1,4 +1,4 @@
-# Sqsite
+# Tidal Flow
 
 Tidal Flow assertion library is a Java based fluent assertion library.
 

@@ -22,7 +22,7 @@ public class ListAssertionsSoftTest {
         try {
             Soft.verify("The list should contain 'hello' and 'world'", getList()).contains("hellos", "world");
             new ErrorStack().execute();
-        } catch (VerificationError e) {
+        } catch (AssertionError e) {
             verify("falseValueTrueTestFail", e.getMessage())
                     .contains("Verification Failed: Element 'hellos' not in the list [hello, world, welcome]")
                     .contains("Description: The list should contain 'hello' and 'world'")
@@ -40,7 +40,7 @@ public class ListAssertionsSoftTest {
         try {
             Soft.verify("The list should not contain super list", getSubList()).containsList(getList());
             new ErrorStack().execute();
-        } catch (VerificationError e) {
+        } catch (AssertionError e) {
             verify("The list should not contain super list", e.getMessage())
                     .contains("Verification Failed: List '[hello, world]' does not contain element 'welcome' from list '[hello, world, welcome]'")
                     .contains("Description: The list should not contain super list")
@@ -53,7 +53,7 @@ public class ListAssertionsSoftTest {
         try {
             Soft.verify("The list should contain 'hello', 'world', 'happy', 'learning'", getList()).contains("hello", "world", "happy", "learning");
             new ErrorStack().execute();
-        } catch (VerificationError e) {
+        } catch (AssertionError e) {
             verify("The list should contain 'hello', 'world', 'happy', 'learning'", e.getMessage())
                     .contains("Verification Failed: Element 'happy' not in the list [hello, world, welcome]")
                     .contains("Description: The list should contain 'hello', 'world', 'happy', 'learning'")
@@ -78,7 +78,7 @@ public class ListAssertionsSoftTest {
             Soft.verify("The list should not contain 'hello', 'world'", getList()).notContains("world");
             Soft.verify("The list should not contain 'hello', 'world'", getList()).notContains("hello");
             new ErrorStack().execute();
-        } catch (VerificationError e) {
+        } catch (AssertionError e) {
             verify("The list should not contain 'hello', 'world'", e.getMessage())
                     .contains("Verification Failed: Element 'hello' is contained in the list [hello, world, welcome]")
                     .contains("Description: The list should not contain 'hello', 'world'")
@@ -102,7 +102,7 @@ public class ListAssertionsSoftTest {
         try {
             Soft.verify("The list should not contain 'hello', 'world'", getList()).isSubListOf(getSubList());
             new ErrorStack().execute();
-        } catch (Exception e) {
+        } catch (AssertionError e) {
             verify("falseValueTrueTestFail", e.getMessage())
                     .contains("Verification Failed: List '[hello, world, welcome]' expected to be a sublist of '[hello, world]''")
                     .contains("Description: The list should not contain 'hello', 'world'")
@@ -116,7 +116,7 @@ public class ListAssertionsSoftTest {
         try {
             Soft.verify("The list size is two and contains 'happy learning'", getList()).hasSize(3).contains("happy learning");
             new ErrorStack().execute();
-        } catch (VerificationError e) {
+        } catch (AssertionError e) {
             verify("falseValueTrueTestFail", e.getMessage())
                     .contains("Verification Failed: Element 'happy learning' not in the list [hello, world, welcome]")
                     .contains("Description: The list size is two and contains 'happy learning'")

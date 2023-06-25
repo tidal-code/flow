@@ -20,14 +20,19 @@ public class ListAssertionsTest {
         verify("The list should contain sublist", getList()).containsList(getSubList());
     }
 
+    @Test
+    public void superListTest1(){
+        verify("The list should contain sublist", getList()).isSuperListOf(getSubList());
+    }
+
 
     @Test
     public void superListTest(){
         try {
             verify("The list should not contain 'hello', 'world'", getSubList()).isSuperListOf(getList());
-        } catch(VerificationError e){
+        } catch(AssertionError e){
             verify("Verification Message Test", e.getMessage())
-                    .contains("Verification Failed: List '[hello, world]' expected to be a super list of '[hello, world, welcome]''")
+                    .contains("Reason: List '[hello, world]' expected to be a super list of '[hello, world, welcome]''")
                     .contains("Description: The list should not contain 'hello', 'world'")
                     .contains("com.tidal.flow.assertions.ListAssertionsTest.superListTest");
         }
@@ -38,7 +43,7 @@ public class ListAssertionsTest {
         verify("the input must be an instance of list", getList()).isInstanceOf(ArrayList.class);
     }
 
-    @Test(expected = VerificationError.class)
+    @Test(expected = AssertionError.class)
     public void typeOfTest(){
         verify("the input must be an instance of String list", getList()).ofType(Integer.class);
     }
@@ -53,7 +58,7 @@ public class ListAssertionsTest {
     public void listSizeLessThan(){
         try{
             verify("The list should have a size less than two", getList()).hasSizeLessThan(2).contains("hello", "world");
-        } catch (VerificationError e){
+        } catch (AssertionError e){
             verify("Verification Message Test", e.getMessage()).contains("Verification Failed: List size expected to be less than '2' but was '2'")
                     .contains("Description: The list should have a size less than two")
                     .contains("com.tidal.flow.assertions.ListAssertionsTest.listSizeLessThan");

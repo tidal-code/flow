@@ -23,7 +23,7 @@ public class StringAssertion extends StringAssert<String> {
      */
     @Override
     public StringAssert<String> isNotNullOrEmpty() {
-        if (actual == null || actual.equals("")) {
+        if (actual == null || actual.isEmpty()) {
             status = false;
         }
         String errorDetails = "Given value is either null or empty";

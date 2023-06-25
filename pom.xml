@@ -6,11 +6,11 @@
 
     <groupId>io.github.tidal-code</groupId>
     <artifactId>flow</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.3</version>
 
     <name>Assertions in Java</name>
     <description>Fluent Assertion Library In Java</description>
-    <url>https://github.com/sqsite/assertions</url>
+    <url>https://github.com/tidal-code/flow</url>
 
     <licenses>
         <license>
@@ -44,7 +44,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-
+        <slf4j.version>2.0.5</slf4j.version>
         <maven-surefire-plugin>2.22.2</maven-surefire-plugin>
         <maven-compiler-plugin>3.8.1</maven-compiler-plugin>
         <maven.surefire.plugin.version>2.21.0</maven.surefire.plugin.version>
@@ -83,6 +83,16 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
 

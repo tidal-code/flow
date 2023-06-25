@@ -23,6 +23,11 @@ public abstract class BaseAssertion<T> implements BaseAssertionTypes<T> {
         if (!actual.equals(value)) {
             status = false;
         }
+
+        if(actual.getClass() != value.getClass()){
+            status = false;
+        }
+
         String errorDetail = String.format("Actual value '%s' is not equal to comparison value '%s'", actual, value);
         new ErrorStack.Builder(errorDetail, description)
                 .withStackTrace(Thread.currentThread().getStackTrace())
@@ -42,6 +47,7 @@ public abstract class BaseAssertion<T> implements BaseAssertionTypes<T> {
         if (actual.equals(value)) {
             status = false;
         }
+
         String errorDetail = String.format("Actual value '%s' should not be equal to comparison value '%s'", actual, value);
         new ErrorStack.Builder(errorDetail, description)
                 .withStackTrace(Thread.currentThread().getStackTrace())
@@ -85,4 +91,5 @@ public abstract class BaseAssertion<T> implements BaseAssertionTypes<T> {
                 .withAssertionStatus(softAssertion, status)
                 .build();
     }
+
 }

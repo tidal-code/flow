@@ -17,7 +17,7 @@ public class DateAssertionSoftTest {
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void testDateAfterFailing(){
         verify("Date should be after failing", getPreviousDate()).isAfter(Date.from(Instant.now()));
         new ErrorStack().execute();
@@ -29,7 +29,7 @@ public class DateAssertionSoftTest {
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void testDateBeforeFail(){
         verify("Date should be before failing", getNextDate()).isBefore( Date.from(Instant.now()));
         new ErrorStack().execute();
@@ -41,7 +41,7 @@ public class DateAssertionSoftTest {
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void futureDateTestFailing(){
         verify("Date should be in future failing", getPreviousDate()).isInTheFuture();
         new ErrorStack().execute();
@@ -53,7 +53,7 @@ public class DateAssertionSoftTest {
         new ErrorStack().execute();
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void pastDateTestFailing(){
         verify("Date should be in future failing", getNextDate()).isInThePast();
         new ErrorStack().execute();

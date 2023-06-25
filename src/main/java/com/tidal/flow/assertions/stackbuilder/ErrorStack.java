@@ -1,6 +1,5 @@
 package com.tidal.flow.assertions.stackbuilder;
 
-import com.tidal.flow.assertions.VerificationError;
 import com.tidal.flow.data.ExceptionData;
 
 import java.util.Arrays;
@@ -11,30 +10,27 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ErrorStack {
     private String errorDetail;
-    private String description;
     private StackTraceElement[] stackTrace;
     private boolean softAssertion;
     private boolean passed;
-
     private static final String PASS_KEY = "_pass";
-
     private static final ThreadLocal<Builder> builder = ThreadLocal.withInitial(Builder::new);
 
     public static Builder builder(String errorDetail, String description){
-        return builder.get().withErrorDetails(errorDetail).withDescription(description);
+        return builder.get().withErrorDetails(errorDetail + "\nDescription: " + description);
     }
 
     public void execute() {
         try {
-            StringBuilder errorMessage = getSoftErrorMsg(ExceptionData.getExceptionDataMap());
+            StringBuilder errorMessage = getErrorMessage(ExceptionData.getExceptionDataMap());
             if (errorMessage.length() > 0) {
-                throw new VerificationError(System.lineSeparator() + errorMessage);
+                throw new AssertionError(System.lineSeparator() + errorMessage);
             }
         } finally {
+            builder.remove();
             ExceptionData.removeExceptionData();
         }
     }
-
 
     private void runSoftAssertion() {
         if (softAssertion) {
@@ -54,7 +50,9 @@ public class ErrorStack {
 
                 errorMessage.append(System.lineSeparator());
                 errorMessage.append("Verification Failed: ");
-                errorMessage.append(errorDetail);
+                errorMessage.append(System.lineSeparator());
+                errorMessage.append("Reason: ").append(errorDetail);
+
                 errorMessage.append(System.lineSeparator());
 
                 AtomicReference<AtomicInteger> i = new AtomicReference<>(new AtomicInteger());
@@ -74,12 +72,12 @@ public class ErrorStack {
                     }
                     i.get().getAndIncrement();
                 });
-                throw new VerificationError(errorMessage.toString());
+                throw new AssertionError(errorMessage.toString());
             }
         }
     }
 
-    private StringBuilder getSoftErrorMsg(Map<String, Object> errorData) {
+    private StringBuilder getErrorMessage(Map<String, Object> errorData) {
         StringBuilder errorMessage = new StringBuilder();
         AtomicReference<AtomicInteger> i = new AtomicReference<>(new AtomicInteger());
 
@@ -136,10 +134,8 @@ public class ErrorStack {
         return passMessage;
     }
 
-
     public static class Builder {
         private String errorDetail;
-        private String description;
         private StackTraceElement[] stackTrace;
         private boolean softAssertion;
         private boolean passed;
@@ -148,7 +144,6 @@ public class ErrorStack {
         }
 
         public Builder(String errorDetail, String description) {
-            this.description = description;
             this.errorDetail = errorDetail + "\nDescription: " + description;
         }
 
@@ -156,12 +151,6 @@ public class ErrorStack {
             this.errorDetail = errorDetail;
             return this;
         }
-
-        public Builder withDescription(String description){
-            this.description = description;
-            return this;
-        }
-
 
         public Builder withStackTrace(StackTraceElement[] stackTrace) {
             this.stackTrace = stackTrace;
@@ -177,7 +166,6 @@ public class ErrorStack {
         public void build() {
             ErrorStack errorStack = new ErrorStack();
             errorStack.errorDetail = this.errorDetail;
-            errorStack.description = this.description;
             errorStack.stackTrace = this.stackTrace;
             errorStack.softAssertion = this.softAssertion;
             errorStack.passed = this.passed;

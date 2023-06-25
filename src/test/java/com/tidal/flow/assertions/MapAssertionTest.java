@@ -35,17 +35,17 @@ public class MapAssertionTest {
         verify("Map should contain key value paid '1', '2'", getPropertiesMap()).containsKeyAndValue("class", "test_button_class");
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void mapContainsKeyValueNullTypeTest() {
         verify("Test will null key not existing in map", getDiffMapIntType()).containsKeyAndValue(null, 2);
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void mapContainsKeyValueNullValueTypeTest() {
         verify("Test with null value not existing", getDiffMapIntType()).containsKeyAndValue(1, null);
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void mapContainsKeyValueNullValueExistingTypeTest() {
         verify("Test with null value existing in map", getDiffMapIntType()).containsKeyAndValue(7, null);
     }
@@ -60,12 +60,12 @@ public class MapAssertionTest {
         verify("Same map type test", getMap()).isSameTypeAs(getMapSimilar());
     }
 
-    @Test(expected = VerificationError.class)
+    @Test(expected = AssertionError.class)
     public void mapContainsKeyFalseTest() {
         verify("Map should contain key 'happy'", getMap()).containsKeys("Java");
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void mapContainsKeysTest() {
         verify("Map should contain key 'hello'", getMap()).containsKeys("hellow", "happyy");
     }
@@ -76,7 +76,7 @@ public class MapAssertionTest {
         try {
             Soft.verify("Map should contain values 'hello, world'", getNullMap()).containsValues("hello", "happy").containsKeys("world", "learning").isNotNull();
             new ErrorStack().execute();
-        } catch (RuntimeException e) {
+        } catch (AssertionError e) {
             verify("null map test", e.getMessage())
                     .contains("Description: Verification failure due to null input")
                     .contains("com.tidal.flow.assertions.MapAssertionTest.nullMapTest");
@@ -84,7 +84,7 @@ public class MapAssertionTest {
 
     }
 
-    @Test (expected = VerificationError.class)
+    @Test (expected = AssertionError.class)
     public void emptyMapTest() {
         Soft.verify("Map should not be empty", getMap()).isNotEmpty();
         new ErrorStack().execute();
@@ -95,7 +95,7 @@ public class MapAssertionTest {
         try {
             Soft.verify("Map should not be empty", getEmptyMap()).isNotEmpty();
             new ErrorStack().execute();
-        } catch (VerificationError e) {
+        } catch (AssertionError e) {
             verify("empty map test", e.getMessage())
                     .contains("Verification Failed: Map '{}' is an empty map")
                     .contains("Description: Map should not be empty")
@@ -107,7 +107,7 @@ public class MapAssertionTest {
     public void emptyMapFailTest() {
         try {
             Soft.verify("Map should not be empty", getMap()).isEmpty();
-        } catch (VerificationError e) {
+        } catch (AssertionError e) {
             verify("empty map fail test", e.getMessage())
                     .contains("Verification Failed: Map '{happy=learning, hello=world}' is not an empty map")
                     .contains("Description: Map should not be empty")
