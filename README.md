@@ -1,6 +1,6 @@
 # Tidal Flow
 
-Tidal Flow assertion library is a Java based fluent assertion library.
+Tidal Flow is a Java based fluent assertion library.
 
 ## Downloads
 
