@@ -8,7 +8,7 @@ You can download the dependency from maven
 
 ``` maven
 <dependency>
-   <groupId>io.github.tidal-code</groupId>
+   <groupId>dev.tidalcode</groupId>
    <artifactId>flow</artifactId>
    <version>1.0.0</version>
 </dependency>
