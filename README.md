@@ -10,7 +10,7 @@ You can download the dependency from maven
 <dependency>
    <groupId>dev.tidalcode</groupId>
    <artifactId>flow</artifactId>
-   <version>1.0.0</version>
+   <version>1.0.7</version>
 </dependency>
 ```
 
