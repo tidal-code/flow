@@ -45,7 +45,7 @@
         <allure.maven.version>2.10.0</allure.maven.version>
         <allure.report.version>2.10.0</allure.report.version>
         <aspectj.version>1.9.8</aspectj.version>
-        <jackson-lib-version>2.22.2</jackson-lib-version>
+        <jackson-lib-version>2.22.3</jackson-lib-version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
@@ -79,7 +79,7 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
+            <artifactId>slf4j-reload4j</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
