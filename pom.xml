@@ -6,7 +6,7 @@
 
     <groupId>dev.tidalcode</groupId>
     <artifactId>flow</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 
     <name>Assertions in Java</name>
     <description>Fluent Assertion Library In Java</description>
