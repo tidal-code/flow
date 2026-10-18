@@ -29,10 +29,10 @@ jobs:
         gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
     - name: Set Release Version
-      run: mvn -B versions:set -DgenerateBackupPoms=false -DnewVersion=${{ github.event.release.tag_name }}
+      run: ./mvnw -B versions:set -DgenerateBackupPoms=false -DnewVersion=${{ github.event.release.tag_name }}
 
     - name: Publish Packages to Apache Maven
-      run: mvn -B -P release deploy -DskipTests
+      run: ./mvnw -B -P release deploy -DskipTests
       env:
         MAVEN_USERNAME: ${{ secrets.CENTRAL_TOKEN_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
