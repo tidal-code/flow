@@ -37,3 +37,12 @@ jobs:
         MAVEN_USERNAME: ${{ secrets.CENTRAL_TOKEN_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSWORD }}
+
+    - name: Upload Central bundle for debugging
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: central-bundle
+        path: target/**/central-bundle.zip
+        if-no-files-found: warn
+        retention-days: 7
