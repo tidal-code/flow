@@ -6,7 +6,7 @@
 
     <groupId>dev.tidalcode</groupId>
     <artifactId>flow</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
 
     <name>Assertions in Java</name>
     <description>Fluent Assertion Library In Java</description>
@@ -45,7 +45,7 @@
         <allure.maven.version>2.10.0</allure.maven.version>
         <allure.report.version>2.10.0</allure.report.version>
         <aspectj.version>1.9.8</aspectj.version>
-        <jackson-lib-version>2.22.3</jackson-lib-version>
+        <jackson-lib-version>2.22.4</jackson-lib-version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
